@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26048689b7974315897a62a2c9122101, type: 3}
+  m_Name: Movement State Data
+  m_EditorClassIdentifier: 
+  state: {fileID: 11400000, guid: f4f5a879f821e9c41959b557b7bb6d23, type: 2}
+  conditionsToExitState:
+  - {fileID: 11400000, guid: 07aab6c526b82744083a3de43493dfe3, type: 2}
+  - {fileID: 11400000, guid: fab57dd7cc196ac49be629bf2febbc6c, type: 2}
+  exitStates:
+  - {fileID: 11400000, guid: dee4a201efbb5a549a24e1dc5d8efc87, type: 2}
+  - {fileID: 11400000, guid: d82c353e3a26a274f8b6fe553c54c5b9, type: 2}
