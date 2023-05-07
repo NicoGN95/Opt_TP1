@@ -5,5 +5,6 @@ namespace _Main.Scripts.Update
         void MyUpdate();
         void SubscribeUpdateManager();
         void UnSubscribeUpdateManager();
+
     }
 }
