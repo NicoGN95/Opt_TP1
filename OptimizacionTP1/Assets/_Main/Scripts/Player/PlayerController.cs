@@ -11,36 +11,55 @@ namespace _Main.Scripts.Player
         private PlayerModel model;
         private PlayerData data;
         private float shootCooldownTime;
-        private void Awake()
+        private void Start()
         {
             model = GetComponent<PlayerModel>();
             data = model.GetData();
-            var l_inputManager = InputManager.Instance;
             
             
-            if(l_inputManager.TryGetInputAction(data.MovementID, out var l_movementAction))
+            if(InputManager.Instance.TryGetInputAction(data.MovementID, out var l_movementAction))
             {
                 l_movementAction.performed += MovementActionOnPerformed;
+                l_movementAction.canceled += MovementActionOnCanceled;
             }
 
-            if (l_inputManager.TryGetInputAction(data.RotationID, out var l_rotateAction))
+            if (InputManager.Instance.TryGetInputAction(data.RotationID, out var l_rotateAction))
             {
                 l_rotateAction.performed += RotateActionOnPerformed;
+                l_rotateAction.canceled += RotateActionOnCanceled;
             }
-            if(l_inputManager.TryGetInputAction(data.ShootID, out var l_shootAction))
+            if(InputManager.Instance.TryGetInputAction(data.ShootID, out var l_shootAction))
             {
                 l_shootAction.performed += ShootActionOnPerformed;
             }
             
         }
 
-        private void RotateActionOnPerformed(InputAction.CallbackContext p_obj)
+        private void MovementActionOnPerformed(InputAction.CallbackContext p_context)
         {
-            throw new NotImplementedException();
+            var l_value = p_context.ReadValue<Vector2>();
+
+            var l_dir =  new Vector3(0, 0, l_value.y);
+            model.SetCurrDir(l_value);
+        }
+        private void MovementActionOnCanceled(InputAction.CallbackContext p_obj)
+        {
+            model.SetCurrDir(Vector3.zero);
         }
 
+        
 
-        private void ShootActionOnPerformed(InputAction.CallbackContext p_obj)
+        private void RotateActionOnPerformed(InputAction.CallbackContext p_context)
+        {
+            var l_value = p_context.ReadValue<Vector2>();
+            model.SetCurrRot(l_value);
+        }
+        private void RotateActionOnCanceled(InputAction.CallbackContext p_obj)
+        {
+            model.SetCurrRot(Vector3.zero);
+        }
+
+        private void ShootActionOnPerformed(InputAction.CallbackContext p_context)
         {
             if (shootCooldownTime - Time.time < 0)
             {
@@ -49,12 +68,6 @@ namespace _Main.Scripts.Player
             }
         }
 
-        private void MovementActionOnPerformed(InputAction.CallbackContext p_context)
-        {
-            var l_value = p_context.ReadValue<Vector2>();
-
-            var l_dir = new Vector3(l_value.x, 0, l_value.y);
-            model.Move(l_dir);
-        }
+        
     }
 }

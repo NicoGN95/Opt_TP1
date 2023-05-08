@@ -9,9 +9,10 @@ namespace _Main.Scripts.Manager
     public class SpawnerSystem : MonoBehaviour, IUpdateObject
     {
         [SerializeField] private float delayToSpawn;
+        [SerializeField] private int maxEnemyOnGrid;
         [SerializeField] private Grid grid;
 
-
+        private int currEnemyOnGrid;
         private float m_timer;
 
         private void Start()
@@ -28,7 +29,11 @@ namespace _Main.Scripts.Manager
 
         public void MyUpdate()
         {
-            if (m_timer > Time.time)
+            
+            if(LevelManager.Instance.DefeatedEnemyCount >= LevelManager.TOTAL_ENEMIES)
+                return;
+            
+            if (m_timer > Time.time || currEnemyOnGrid >= maxEnemyOnGrid)
                 return;
 
             m_timer = Time.time + delayToSpawn;
@@ -38,6 +43,7 @@ namespace _Main.Scripts.Manager
                 return;
             
             l_enemy.InitializeEnemy(grid);
+            AddEnemyCount();
         }
         
         public void SubscribeUpdateManager()
@@ -49,5 +55,8 @@ namespace _Main.Scripts.Manager
         {
             UpdateManager.Instance.RemoveListener(this);
         }
+
+        public void AddEnemyCount() => currEnemyOnGrid++;
+        public void ReduceEnemyCount() => currEnemyOnGrid--;
     }
 }
