@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8883a3f05ba74d9b9bc6269579925427, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  <MovementSpeed>k__BackingField: 20
-  <RotationSpeed>k__BackingField: 3
+  <MovementSpeed>k__BackingField: 8
+  <RotationSpeed>k__BackingField: 2
   <DelayTimeToShoot>k__BackingField: 0.5
   <BulletData>k__BackingField: {fileID: 11400000, guid: 6a457691c539b0b41852841d0933152b, type: 2}
   <MovementID>k__BackingField: Movement
