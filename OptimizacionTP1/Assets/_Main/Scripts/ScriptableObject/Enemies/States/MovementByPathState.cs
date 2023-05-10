@@ -40,7 +40,9 @@ namespace _Main.Scripts.ScriptableObject.Enemies.States
 
         public override void ExecuteState(EnemyModel p_model)
         {
-            var l_data = m_dictionaryMovementData[p_model];
+            if (!m_dictionaryMovementData.TryGetValue(p_model, out var l_data))
+                return;
+            
             var l_enemyPosition = p_model.transform.position;
 
             var l_point = l_data.Pathfinder.GetPointByIndex(l_data.IndexPath);

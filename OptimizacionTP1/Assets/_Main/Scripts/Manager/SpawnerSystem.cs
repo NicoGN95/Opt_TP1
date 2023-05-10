@@ -6,6 +6,7 @@ namespace _Main.Scripts.Manager
 {
     public class SpawnerSystem : MonoBehaviour, IUpdateObject
     {
+        [SerializeField] private float chanceSpawnBomb;
         [SerializeField] private float delayToSpawn;
         [SerializeField] private int maxEnemyOnGrid;
         [SerializeField] private Grid grid;
@@ -35,6 +36,15 @@ namespace _Main.Scripts.Manager
                 return;
 
             m_timer = Time.time + delayToSpawn;
+
+            var l_chance = Random.Range(0, 100);
+
+            if (l_chance <= chanceSpawnBomb)
+            {
+                var l_bomb = LevelManager.Instance.GetBombForPool();
+                l_bomb.Initialize(grid.GetRandomPos());
+            }
+            
             var l_enemy = LevelManager.Instance.GetEnemyForPool();
             
             if (l_enemy == default)
