@@ -12,7 +12,7 @@ namespace _Main.Scripts.Manager
         [SerializeField] private int maxEnemyOnGrid;
         [SerializeField] private Grid grid;
 
-        private int currEnemyOnGrid;
+        private int m_currEnemyOnGrid;
         private float m_timer;
 
         private void Start()
@@ -29,11 +29,11 @@ namespace _Main.Scripts.Manager
 
         public void MyUpdate()
         {
-            
-            if(LevelManager.Instance.DefeatedEnemyCount >= LevelManager.TOTAL_ENEMIES)
+            var l_levelManager = LevelManager.Instance;
+            if (l_levelManager.GetDefeatedEnemyCount() >= l_levelManager.TotalEnemies)
                 return;
             
-            if (m_timer > Time.time || currEnemyOnGrid >= maxEnemyOnGrid)
+            if (m_timer > Time.time || m_currEnemyOnGrid >= maxEnemyOnGrid)
                 return;
 
             m_timer = Time.time + delayToSpawn;
@@ -56,7 +56,7 @@ namespace _Main.Scripts.Manager
             UpdateManager.Instance.RemoveListener(this);
         }
 
-        public void AddEnemyCount() => currEnemyOnGrid++;
-        public void ReduceEnemyCount() => currEnemyOnGrid--;
+        public void AddEnemyCount() => m_currEnemyOnGrid++;
+        public void ReduceEnemyCount() => m_currEnemyOnGrid--;
     }
 }

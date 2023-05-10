@@ -10,13 +10,12 @@ namespace _Main.Scripts.Player
     public class PlayerData : UnityEngine.ScriptableObject
     {
         [field: SerializeField] public float MovementSpeed { get; private set; }
-        [field: SerializeField] public float RotationSpeed { get; private set; }
         [field: SerializeField] public float DelayTimeToShoot { get; private set; }
         [field: SerializeField] public BulletData BulletData { get; private set; }
         [field: SerializeField] public String MovementID { get; private set; }
         [field: SerializeField] public String RotationID { get; private set; }
         [field: SerializeField] public String ShootID { get; private set; }
-        [field: SerializeField] public LayerMask EnemyLayer { get; private set; }
+        [field: SerializeField] public int EnemyLayerId { get; private set; }
         
         
     }

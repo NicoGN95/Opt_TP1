@@ -7,20 +7,20 @@ namespace _Main.Scripts.Manager
     public class LevelManager : MonoBehaviour
     {
         public static LevelManager Instance;
-        public const int TOTAL_ENEMIES = 4;
+        [field: SerializeField] public int TotalEnemies { get; private set; }
 
         [SerializeField] private BulletController bulletPrefab;
         [SerializeField] private EnemyModel enemyModelPrefab;
         [SerializeField] private SpawnerSystem spawnerSystem;
+        [SerializeField] private UiManager uiManager;
         
         private PoolGeneric<BulletController> m_bulletPool;
         private PoolGeneric<EnemyModel> m_enemiesPool;
 
+        private int m_defeatedEnemyCount;
+        private int m_remainingEnemyCount;
         
-        private int defeatedEnemyCount;
-        public int DefeatedEnemyCount => defeatedEnemyCount;
-        private int remainingEnemyCount;
-        public int RemainingEnemyCount => remainingEnemyCount;
+        
         private void Awake()
         {
             if (Instance != default)
@@ -33,7 +33,7 @@ namespace _Main.Scripts.Manager
 
             m_bulletPool = new PoolGeneric<BulletController>(bulletPrefab);
             m_enemiesPool = new PoolGeneric<EnemyModel>(enemyModelPrefab);
-            remainingEnemyCount = TOTAL_ENEMIES;
+            m_remainingEnemyCount = TotalEnemies;
         }
 
         private void OnDestroy()
@@ -68,10 +68,15 @@ namespace _Main.Scripts.Manager
             p_enemyModel.gameObject.SetActive(false);
             m_enemiesPool.AddPool(p_enemyModel);
             spawnerSystem.ReduceEnemyCount();
+            
+            if (m_defeatedEnemyCount >= TotalEnemies)
+                return;
 
-            defeatedEnemyCount++;
-            remainingEnemyCount--;
-            UiManager.Instance.OnEnemyDefeated();
+            m_defeatedEnemyCount++;
+            m_remainingEnemyCount--;
+            uiManager.SetInfoEnemiesTextInUi(m_defeatedEnemyCount, m_remainingEnemyCount);
         }
+
+        public int GetDefeatedEnemyCount() => m_defeatedEnemyCount;
     }
 }

@@ -8,37 +8,22 @@ namespace _Main.Scripts.Manager
 {
     public class UiManager : MonoBehaviour
     {
-        public static UiManager Instance;
-        
         [SerializeField] private Text defeatedEnemyCountText;
         [SerializeField] private Text remainingEnemyCountText;
         [SerializeField] private GameObject gameOverPanel;
-        
-        
-        private void Awake()
-        {
-            if (Instance != default)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
-        }
 
         private void Start()
         {
-            remainingEnemyCountText.text = LevelManager.TOTAL_ENEMIES.ToString();
+            remainingEnemyCountText.text = LevelManager.Instance.TotalEnemies.ToString();
             gameOverPanel.SetActive(false);
         }
 
-        public void OnEnemyDefeated()
+        public void SetInfoEnemiesTextInUi(int p_defeatedEnemyCount, int p_remainingEnemyCount)
         {
+            defeatedEnemyCountText.text = p_defeatedEnemyCount.ToString();
+            remainingEnemyCountText.text = p_remainingEnemyCount.ToString();
 
-            defeatedEnemyCountText.text = LevelManager.Instance.DefeatedEnemyCount.ToString();
-            remainingEnemyCountText.text = LevelManager.Instance.RemainingEnemyCount.ToString();
-
-            if (LevelManager.Instance.RemainingEnemyCount <= 0)
+            if (p_remainingEnemyCount <= 0)
             {
                 OnGameOver();
             }

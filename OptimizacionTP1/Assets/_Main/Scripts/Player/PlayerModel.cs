@@ -1,4 +1,5 @@
 ﻿using System;
+using _Main.Scripts.Extension;
 using _Main.Scripts.Interface;
 using _Main.Scripts.Manager;
 using _Main.Scripts.Update;
@@ -11,29 +12,22 @@ namespace _Main.Scripts.Player
         [SerializeField] private PlayerData data;
         [SerializeField] private Transform shootTransform;
         [SerializeField] private Transform spawnPoint;
-        private Rigidbody rigidbody;
-        private float shootCooldown;
+        
+        private Rigidbody m_rigidbody;
+        private float m_shootCooldown;
 
-        private Vector3 currDir;
-        private Vector3 currRot;
-        
-        
-        private float previusFrameTime;
-        private float fixedDeltaTime;
+        private float m_currDir;
+
         private void Start()
         {
-            rigidbody = GetComponent<Rigidbody>();
+            m_rigidbody = GetComponent<Rigidbody>();
             SubscribeUpdateManager();
             transform.position = spawnPoint.position;
         }
 
         public void MyUpdate()
         {
-            fixedDeltaTime = Time.time - previusFrameTime;
-            previusFrameTime = Time.time;
-            
-            Move(currDir);
-            Rotate(currRot);
+            Move();
         }
         public void Shoot()
         {
@@ -41,34 +35,33 @@ namespace _Main.Scripts.Player
             l_bullet.InitializeBullet(data.BulletData, transform.forward, shootTransform.position);
         }
 
-        private void Move(Vector2 p_dir)
+        public void Move()
         {
-            var l_vel = transform.forward;
+            var l_force = transform.forward * (m_currDir * data.MovementSpeed);
             
-            if (p_dir.y > 0.2)
-            {
-                l_vel *= p_dir.y * data.MovementSpeed;
-            }
-            else if (p_dir.y < 0.2)
-            {
-                l_vel *= p_dir.y * data.MovementSpeed;
-            }
+            if (l_force.magnitude < 0.25f)
+                return;
             
-            rigidbody.AddForce(l_vel, ForceMode.Force);
-            
+            m_rigidbody.AddForce(l_force);
         }
 
-        private void Rotate(Vector3 p_dirToRotate)
+        private void OnDestroy()
         {
-            transform.forward = Vector3.Lerp(transform.forward, transform.right * p_dirToRotate.x, fixedDeltaTime * data.RotationSpeed);
+            UnSubscribeUpdateManager();
         }
+
+        public void Rotate(float p_dirToRotate)
+        {
+            transform.Rotate(new Vector3(0f, 90 * p_dirToRotate));
+        }
+        
         public PlayerData GetData() => data;
-        public void SetCurrRot(Vector3 p_rotation) => currRot = p_rotation; 
-        public void SetCurrDir(Vector3 p_dir) => currDir = p_dir;
+        public void SetCurrDir(float p_dir) => m_currDir = p_dir;
 
         private void Die()
         {
             transform.position = spawnPoint.position;
+            transform.rotation = Quaternion.Euler(Vector3.zero);
         }
         public void SubscribeUpdateManager()
         {
@@ -80,29 +73,26 @@ namespace _Main.Scripts.Player
             UpdateManager.Instance.RemoveListener(this);
         }
 
-
         public bool GetIsDeath()
         {
             return false;
-            
         }
 
         public void SetIsDeath(bool p_value) => Die();
 
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnCollisionEnter(Collision p_collision)
         {
-            var l_otherLayerMask = collision.gameObject.layer;
+            var l_otherLayerMask = p_collision.gameObject.layer;
             
-            //No entiendo porque no anda con !=
-            if (l_otherLayerMask == data.EnemyLayer)
+            if (l_otherLayerMask != data.EnemyLayerId)
                 return;
 
-            if (collision.gameObject.TryGetComponent(out IDeathController l_deathController))
-            {
-                l_deathController.SetIsDeath(true);
-                Die();
-            }
+            if (!p_collision.gameObject.TryGetComponent(out IDeathController l_deathController)) 
+                return;
+            
+            l_deathController.SetIsDeath(true);
+            Die();
         }
     }
 }
