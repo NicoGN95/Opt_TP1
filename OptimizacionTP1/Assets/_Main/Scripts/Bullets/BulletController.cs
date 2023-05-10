@@ -36,6 +36,11 @@ namespace _Main.Scripts.Bullets
             UnSubscribeUpdateManager();
         }
 
+        private void OnDestroy()
+        {
+            UnSubscribeUpdateManager();
+        }
+
         private void OnTriggerEnter(Collider p_other)
         {
             var l_otherLayerMask = p_other.gameObject.layer;

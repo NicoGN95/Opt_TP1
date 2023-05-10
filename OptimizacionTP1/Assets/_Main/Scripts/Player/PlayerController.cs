@@ -17,21 +17,42 @@ namespace _Main.Scripts.Player
             m_model = GetComponent<PlayerModel>();
             m_data = m_model.GetData();
 
-            if(InputManager.Instance.TryGetInputAction(m_data.MovementID, out var l_movementAction))
+            var l_inputManager = InputManager.Instance;
+            if(l_inputManager.TryGetInputAction(m_data.MovementID, out var l_movementAction))
             {
                 l_movementAction.performed += MovementActionOnPerformed;
                 l_movementAction.canceled += MovementActionOnCanceled;
             }
 
-            if (InputManager.Instance.TryGetInputAction(m_data.RotationID, out var l_rotateAction))
+            if (l_inputManager.TryGetInputAction(m_data.RotationID, out var l_rotateAction))
             {
                 l_rotateAction.performed += RotateActionOnPerformed;
             }
-            if(InputManager.Instance.TryGetInputAction(m_data.ShootID, out var l_shootAction))
+            
+            if(l_inputManager.TryGetInputAction(m_data.ShootID, out var l_shootAction))
             {
                 l_shootAction.performed += ShootActionOnPerformed;
             }
+        }
+
+        private void OnDestroy()
+        {
+            var l_inputManager = InputManager.Instance;
+            if(l_inputManager.TryGetInputAction(m_data.MovementID, out var l_movementAction))
+            {
+                l_movementAction.performed -= MovementActionOnPerformed;
+                l_movementAction.canceled -= MovementActionOnCanceled;
+            }
+
+            if (l_inputManager.TryGetInputAction(m_data.RotationID, out var l_rotateAction))
+            {
+                l_rotateAction.performed -= RotateActionOnPerformed;
+            }
             
+            if(l_inputManager.TryGetInputAction(m_data.ShootID, out var l_shootAction))
+            {
+                l_shootAction.performed -= ShootActionOnPerformed;
+            }
         }
 
         private void MovementActionOnCanceled(InputAction.CallbackContext p_obj)
