@@ -61,8 +61,14 @@ namespace _Main.Scripts.ScriptableObject.Enemies.States
             if (l_distance < 0.5f)
                 l_data.IndexPath++;
             
+            
+            
+            
             if (l_data.IndexPath < l_data.MaxIndex) 
                 return;
+            
+            l_data.IndexPath = l_data.MaxIndex -1;
+            
             l_data.Pathfinder.FindPath(p_model.transform.position);
             l_data.MaxIndex = l_data.Pathfinder.GetPath().Count;
             l_data.IndexPath = 0;

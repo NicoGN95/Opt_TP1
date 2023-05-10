@@ -33,10 +33,9 @@ namespace _Main.Scripts.Bullets
         private void DeactivateBullet()
         {
             OnDeactivateBullet?.Invoke(this);
-            UnSubscribeUpdateManager();
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             UnSubscribeUpdateManager();
         }

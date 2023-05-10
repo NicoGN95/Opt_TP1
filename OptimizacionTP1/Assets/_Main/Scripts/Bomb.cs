@@ -35,10 +35,6 @@ namespace _Main.Scripts
             UnSubscribeUpdateManager();
         }
 
-        private void OnDestroy()
-        {
-            UnSubscribeUpdateManager();
-        }
 
         public void MyUpdate()
         {

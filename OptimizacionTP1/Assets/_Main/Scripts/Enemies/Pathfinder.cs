@@ -27,11 +27,10 @@ namespace _Main.Scripts.Enemies
             var l_openSet = new List<Node>();
             var l_closedSet = new HashSet<Node>();
 
-            var l_watchDog = 200;
 
             l_openSet.Add(l_seekerNode);
 
-            while (l_watchDog > 0 || l_openSet.Count > 0)
+            while (l_openSet.Count > 0)
             {
                 var l_nodeZero = l_openSet[0];
                 if (l_nodeZero == l_targetNode)
@@ -47,7 +46,6 @@ namespace _Main.Scripts.Enemies
                 l_closedSet.Add(l_nodeZero);
                 l_openSet.Remove(l_nodeZero);
                 l_openSet = OrderNodesByDistance(l_openSet, l_targetNode);
-                l_watchDog--;
             }
             RetracePath(l_seekerNode, l_targetNode);
         }
@@ -56,7 +54,9 @@ namespace _Main.Scripts.Enemies
             m_path.Clear();
             var l_currentNode = p_endNode;
 
-            while (l_currentNode != p_startNode)
+            
+            
+            while (l_currentNode != default && l_currentNode != p_startNode)
             {
                 m_path.Add(l_currentNode.worldPosition);
                 l_currentNode = l_currentNode.parent;
