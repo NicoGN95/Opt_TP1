@@ -14,8 +14,9 @@ namespace _Main.Scripts.Player
         {
             m_model = GetComponent<PlayerModel>();
             m_data = m_model.GetData();
-
-            var l_inputManager = InputManager.Instance;
+            
+            //Aca optimizamos Stack y utilizamos caching para no estar constantemente accediendo a direcciones de memoria.
+            var l_inputManager = InputManager.Instance; 
             if(l_inputManager.TryGetInputAction(m_data.MovementID, out var l_movementAction))
             {
                 l_movementAction.performed += MovementActionOnPerformed;
