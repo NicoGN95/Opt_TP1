@@ -21,7 +21,11 @@ namespace _Main.Scripts.Manager
 
         private int m_defeatedEnemyCount;
         private int m_remainingEnemyCount;
-
+        
+        
+        //Aca estamos haciendo una optimizacion de HEAP ya que en la utilizacion de diversos pools logramos evitar tener que estar generando nuevas direcciones de memoria
+        // y utilizamos las ya creadas.
+        
         private void Awake()
         {
             if (Instance != default)
