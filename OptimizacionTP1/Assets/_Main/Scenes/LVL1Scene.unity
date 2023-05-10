@@ -4090,6 +4090,7 @@ GameObject:
   - component: {fileID: 433563186}
   - component: {fileID: 433563187}
   - component: {fileID: 433563188}
+  - component: {fileID: 433563189}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -4124,9 +4125,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067618df7c864d2da9a0507835355e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <TotalEnemies>k__BackingField: 4
   bulletPrefab: {fileID: 8889587219911626831, guid: 6d2a3608dbe44ab499c20e339a04155e, type: 3}
   enemyModelPrefab: {fileID: 1041554092, guid: 2e4c7e710f5d2a84084e152c6bbaab08, type: 3}
   spawnerSystem: {fileID: 1068185780}
+  uiManager: {fileID: 433563188}
 --- !u!114 &433563186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4139,7 +4142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26c144a41d7f45b5bfdc847f2090f8da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 1378174328}
+  playerInput: {fileID: 433563189}
   defaultActionMap: PlayerInputs
 --- !u!114 &433563187
 MonoBehaviour:
@@ -4168,6 +4171,36 @@ MonoBehaviour:
   defeatedEnemyCountText: {fileID: 2117697519}
   remainingEnemyCountText: {fileID: 596138509}
   gameOverPanel: {fileID: 1657116317}
+--- !u!114 &433563189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433563182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: a28dba4886929304d998f95455ec4fed, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: PlayerInputs
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &436034613
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13195,17 +13228,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6031463407588124889, guid: 4c9ca58da317de047914a4a83741058b, type: 3}
   m_PrefabInstance: {fileID: 1372446360}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1378174328 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6439121577200676516, guid: e101fb4f60451af4fa0da59b188f58bd, type: 3}
-  m_PrefabInstance: {fileID: 291847232}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1380936465
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,12 +13,9 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   <MovementSpeed>k__BackingField: 8
-  <RotationSpeed>k__BackingField: 2
   <DelayTimeToShoot>k__BackingField: 0.5
   <BulletData>k__BackingField: {fileID: 11400000, guid: 6a457691c539b0b41852841d0933152b, type: 2}
   <MovementID>k__BackingField: Movement
   <RotationID>k__BackingField: Rotation
   <ShootID>k__BackingField: Shoot
-  <EnemyLayer>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 256
+  <EnemyLayerId>k__BackingField: 8
