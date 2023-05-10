@@ -19,8 +19,7 @@ namespace _Main.Scripts.Manager
 
         private int m_defeatedEnemyCount;
         private int m_remainingEnemyCount;
-        
-        
+
         private void Awake()
         {
             if (Instance != default)

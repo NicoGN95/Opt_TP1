@@ -1,6 +1,4 @@
-﻿using System;
-using _Main.Scripts.Manager;
-using _Main.Scripts.Update;
+﻿using _Main.Scripts.Manager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

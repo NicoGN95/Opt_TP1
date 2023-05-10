@@ -30,7 +30,7 @@ namespace _Main.Scripts
 
         public void AddPool(T p_poolEntry)
         {
-            if (!m_inUse.Contains(p_poolEntry))
+            if (!m_inUse.Contains(p_poolEntry)) 
                 return;
             
             m_inUse.Remove(p_poolEntry);

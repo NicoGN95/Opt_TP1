@@ -1,6 +1,4 @@
-﻿using System;
-using _Main.Scripts.Extension;
-using _Main.Scripts.Interface;
+﻿using _Main.Scripts.Interface;
 using _Main.Scripts.Manager;
 using _Main.Scripts.Update;
 using UnityEngine;
@@ -20,6 +18,7 @@ namespace _Main.Scripts.Player
 
         private void Start()
         {
+            // Caching
             m_rigidbody = GetComponent<Rigidbody>();
             SubscribeUpdateManager();
             transform.position = spawnPoint.position;
@@ -37,11 +36,12 @@ namespace _Main.Scripts.Player
 
         public void Move()
         {
-            var l_force = transform.forward * (m_currDir * data.MovementSpeed);
-            
-            if (l_force.magnitude < 0.25f)
+            // Lazy Computation
+            if (m_currDir == 0)
                 return;
             
+            var l_force = transform.forward * (m_currDir * data.MovementSpeed);
+
             m_rigidbody.AddForce(l_force);
         }
 
@@ -79,7 +79,6 @@ namespace _Main.Scripts.Player
         }
 
         public void SetIsDeath(bool p_value) => Die();
-
 
         private void OnCollisionEnter(Collision p_collision)
         {

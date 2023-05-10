@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GridSystem : MonoBehaviour
@@ -45,7 +43,6 @@ public class GridSystem : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         if (grid == null) { return; }
-
 
         Gizmos.color = Color.white;
         for (int x = 0; x < gridSize; x++)

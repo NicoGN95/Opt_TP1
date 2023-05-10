@@ -1,7 +1,5 @@
-using System;
 using _Main.Scripts.Update;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace _Main.Scripts.Enemies
 {

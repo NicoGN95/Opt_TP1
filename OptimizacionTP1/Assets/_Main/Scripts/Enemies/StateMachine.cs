@@ -28,7 +28,7 @@ namespace _Main.Scripts.Enemies
         private void InitializeStates(FSMData p_enemyFsmData)
         {
             //Keep track of created states references
-            Dictionary<State, CustomState> l_statesImplemented = new();
+            Dictionary<State, CustomState> l_statesImplemented = new(); //Hashing
             //Initialize state amount
             var l_statesCount = p_enemyFsmData.fsmStates.Length;
             m_states = new CustomState[l_statesCount];

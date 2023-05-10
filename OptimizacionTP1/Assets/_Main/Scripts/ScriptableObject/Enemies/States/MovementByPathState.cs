@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using _Main.Scripts.Enemies;
-using _Main.Scripts.Extension;
 using UnityEngine;
 
 namespace _Main.Scripts.ScriptableObject.Enemies.States

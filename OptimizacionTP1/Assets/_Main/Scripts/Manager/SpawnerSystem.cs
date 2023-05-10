@@ -1,6 +1,4 @@
-﻿using System;
-using _Main.Scripts.Enemies;
-using _Main.Scripts.Update;
+﻿using _Main.Scripts.Update;
 using UnityEngine;
 using Grid = _Main.Scripts.Enemies.Grid;
 

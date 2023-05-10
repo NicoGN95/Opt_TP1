@@ -1,8 +1,6 @@
 ﻿using System;
 using _Main.Scripts.ScriptableObject.Bullets;
-using _Main.Scripts.ScriptableObject.Enemies;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace _Main.Scripts.Player
 {
