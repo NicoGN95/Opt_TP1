@@ -11,11 +11,13 @@ namespace _Main.Scripts.Manager
 
         [SerializeField] private BulletController bulletPrefab;
         [SerializeField] private EnemyModel enemyModelPrefab;
+        [SerializeField] private Bomb bombPrefab;
         [SerializeField] private SpawnerSystem spawnerSystem;
         [SerializeField] private UiManager uiManager;
         
         private PoolGeneric<BulletController> m_bulletPool;
         private PoolGeneric<EnemyModel> m_enemiesPool;
+        private PoolGeneric<Bomb> m_bombPool;
 
         private int m_defeatedEnemyCount;
         private int m_remainingEnemyCount;
@@ -32,6 +34,7 @@ namespace _Main.Scripts.Manager
 
             m_bulletPool = new PoolGeneric<BulletController>(bulletPrefab);
             m_enemiesPool = new PoolGeneric<EnemyModel>(enemyModelPrefab);
+            m_bombPool = new PoolGeneric<Bomb>(bombPrefab);
             m_remainingEnemyCount = TotalEnemies;
         }
 
@@ -40,6 +43,7 @@ namespace _Main.Scripts.Manager
             Instance = default;
             m_bulletPool.ClearData();
             m_enemiesPool.ClearData();
+            m_bombPool.ClearData();
         }
 
         public BulletController GetBulletForPool()
@@ -77,5 +81,21 @@ namespace _Main.Scripts.Manager
         }
 
         public int GetDefeatedEnemyCount() => m_defeatedEnemyCount;
+        
+        
+        public Bomb GetBombForPool()
+        {
+            var l_bomb = m_bombPool.GetorCreate();
+            l_bomb.OnDeactivateBomb += DeactivateBomb;
+            return l_bomb;
+        }
+
+        public void DeactivateBomb(Bomb p_bomb)
+        {
+            p_bomb.OnDeactivateBomb -= DeactivateBomb;
+            p_bomb.gameObject.SetActive(false);
+            
+            m_bombPool.AddPool(p_bomb);
+        }
     }
 }

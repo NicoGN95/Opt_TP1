@@ -4349,9 +4349,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067618df7c864d2da9a0507835355e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <TotalEnemies>k__BackingField: 1
+  <TotalEnemies>k__BackingField: 100
   bulletPrefab: {fileID: 8889587219911626831, guid: 6d2a3608dbe44ab499c20e339a04155e, type: 3}
   enemyModelPrefab: {fileID: 1041554092, guid: 2e4c7e710f5d2a84084e152c6bbaab08, type: 3}
+  bombPrefab: {fileID: 2751518284977085007, guid: 3d40e819b0d2c3449a8ecd3d85b2e1e7, type: 3}
   spawnerSystem: {fileID: 1068185780}
   uiManager: {fileID: 433563188}
 --- !u!114 &433563188
@@ -10587,6 +10588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea70aae2d524a6daee2f6c0afa5b195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chanceSpawnBomb: 20
   delayToSpawn: 5
   maxEnemyOnGrid: 5
   grid: {fileID: 1596057439}
