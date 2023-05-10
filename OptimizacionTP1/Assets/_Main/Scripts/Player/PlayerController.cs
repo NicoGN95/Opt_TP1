@@ -72,11 +72,11 @@ namespace _Main.Scripts.Player
 
         private void ShootActionOnPerformed(InputAction.CallbackContext p_context)
         {
-            if (m_shootCooldownTime - Time.time < 0)
-            {
-                m_model.Shoot();
-                m_shootCooldownTime = Time.time + m_data.DelayTimeToShoot;
-            }
+            if (!(m_shootCooldownTime - Time.time < 0)) 
+                return;
+            
+            m_model.Shoot();
+            m_shootCooldownTime = Time.time + m_data.DelayTimeToShoot;
         }
     }
 }
